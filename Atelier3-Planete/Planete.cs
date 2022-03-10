@@ -9,14 +9,14 @@ using System.Collections.Generic;
 
 namespace Atelier3_Planete
 {
-    class Planete
+    public class Planete : IComparable
     {
         const double MASSE_TERRESTRE = 5.9722 * 10e+24; // Constante de la masse terrestre, unité de mesure.
 
         private String m_nom; // Nom de la planète.
         private int m_rayon; // Rayon de la planète, en km.
         private double m_masse; // Masse de la planète, en masses terrestres.
-        private List<string> satellites;
+        private List<satellite> satellites; // Liste des satellites de la planète.
 
         // --Constructeurs--
 
@@ -144,6 +144,164 @@ namespace Atelier3_Planete
                 return this;
 
             return planete;
+        }
+
+        // --Overrides--
+
+        /**
+         * Comparer les deux planètes selon la masse. Retourne -1 si plus petite que celle en paramètre, 0 si égale, 1 si masse est plus grande, 1 si masse égale mais rayon plus grand.
+         * Paramètre de la planète à comparer.
+         **/
+        public int CompareTo(Object planete)
+        {
+            if ((this.Masse < ((Planete)planete).Masse))
+                return -1;
+            else if (this.Masse > ((Planete)planete).Masse)
+                return 1;
+            else if ((this.Masse == ((Planete)planete).Masse) && (this.Rayon > ((Planete)planete).Rayon))
+                return 1;
+            else
+                return 0;
+        }
+
+        /**
+         * Retourner vrai si la planète a les même caractéristiques à celle envoyée en paramètre, faux si elle ne l'est pas.
+         * Paramètre de la planète à comparer.
+         **/
+        public override bool Equals(Object planete)
+        {
+            if ((this.Rayon == ((Planete)planete).Rayon) && (this.Nom == ((Planete)planete).Nom) && (this.Masse == ((Planete)planete).Masse))
+                return true;
+
+            return false;
+        }
+
+        /**
+         * Retourner l'indice de la planète en paramètre dans le tableau de planète en paramètre. Retourne -1 si pas trouvée.
+         * Paramètre de la planète à trouver et la tableau dans lequel chercher.
+         **/
+        public static int IndexOf(Planete[] planetes, Planete planete)
+        {
+            for (int i = 0; i < planetes.Length; i++)
+            {
+                if(planete.Equals(planetes[i]))
+                    return i;
+            }
+            return -1;
+        }
+
+        /**
+         * Retourner les informations de la planète sous forme de chaine de caractères.
+         **/
+        public override String ToString()
+        {
+            String informations; // Chaine de caractère qui contient toutes les informations sur la planète.
+
+            informations = "Nom : " + this.Nom;
+
+            if (this.Rayon != 0)
+            {
+                informations += "\nRayon : " + this.Rayon + " km";
+                informations += "\nSuperficie : " + this.Superficie + " km^2";
+                informations += "\nVolume : " + this.Volume + " km^3";
+            }
+
+            if (this.Masse != 0)
+            {
+                informations += "\nMasse : " + this.Masse + " kg";
+                if (this.Rayon != 0)
+                    informations += "\nMasse volumique : " + this.MasseVolumique + " kg/km^3";
+            }
+
+            return informations;
+        }
+
+        // --Opérateurs de comparaison--
+
+        /**
+         * Retourner (en utilisant le Equals) vrai si les deux planètes sont équivalentes, sinon faux.
+         **/
+        public static bool operator == (Planete planeteGauche, Planete planeteDroite)
+        {
+            return planeteGauche.Equals(planeteDroite);
+        }
+
+        /**
+         * Retourner (en utilisant le Equals) vrai si les deux planètes ne sont pas équivalentes, sinon faux.
+         **/
+        public static bool operator != (Planete planeteGauche, Planete planeteDroite)
+        {
+            if (planeteGauche.Equals(planeteDroite))
+                return false;
+            else 
+                return true;
+        }
+
+        /**
+         * Retourner (en utilisant le CompareTo) vrai si la planète de gauche est plus grande, sinon faux.
+         **/
+        public static bool operator > (Planete planeteGauche, Planete planeteDroite)
+        {
+            if (planeteGauche.CompareTo(planeteDroite) == 1)
+                return true;
+            return false;
+        }
+
+        /**
+         * Retourner (en utilisant le CompareTo) vrai si la planète de droite est plus grande ou égale, sinon faux.
+         **/
+        public static bool operator < (Planete planeteGauche, Planete planeteDroite)
+        {
+            if (planeteGauche.CompareTo(planeteDroite) == -1)
+                return true;
+            return false;
+        }
+
+        /**
+         * Retourner (en utilisant le CompareTo) vrai si la planète de gauche est plus grande ou égale, sinon faux.
+         **/
+        public static bool operator >= (Planete planeteGauche, Planete planeteDroite)
+        {
+            if (planeteGauche.CompareTo(planeteDroite) == 1 || planeteGauche.Equals(planeteDroite))
+                return true;
+            return false;
+        }
+
+        /**
+         * Retourner (en utilisant le CompareTo) vrai si la planète de droite est plus grande, sinon faux.
+         **/
+        public static bool operator <= (Planete planeteGauche, Planete planeteDroite)
+        {
+            if (planeteGauche.CompareTo(planeteDroite) == -1 || planeteGauche.Equals(planeteDroite))
+                return true;
+            return false;
+        }
+
+        // --Opérateurs arithmétiques--
+
+        /**
+         * Retourner une nouvelle planète en additionnant les caractéristiques des deux planètes (nom, rayon et masse).
+         **/
+        public static Planete operator + (Planete planeteGauche, Planete planeteDroite)
+        {
+            return new Planete(planeteGauche.Nom + "Plus" + planeteDroite.Nom, planeteGauche.Rayon + planeteDroite.Rayon, planeteGauche.Masse + planeteDroite.Masse);
+        }
+
+        /**
+         * Retourner une nouvelle planète en soustrayant les caractéristiques des deux planètes (nom, rayon et masse), mettre à 0 les caractéristiques si celles de la planète de gauche sont plus petites.
+         **/
+        public static Planete operator - (Planete planeteGauche, Planete planeteDroite)
+        {
+            int nouveauRayon = 0; // Nouveau rayon
+            double nouvelleMasse = 0; // Nouvelle masse
+
+            if (planeteGauche.m_rayon > planeteDroite.m_rayon)
+                nouveauRayon = planeteGauche.m_rayon - planeteDroite.m_rayon;
+
+            if (planeteGauche.m_masse > planeteDroite.m_masse)
+                nouvelleMasse = planeteGauche.m_masse - planeteDroite.m_masse;
+
+            return new Planete(planeteGauche.Nom + "Moins" + planeteDroite.Nom, nouveauRayon, nouvelleMasse);
         }
     }
 }

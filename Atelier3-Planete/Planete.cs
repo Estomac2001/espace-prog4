@@ -16,7 +16,7 @@ namespace Atelier3_Planete
         private String m_nom; // Nom de la planète.
         private int m_rayon; // Rayon de la planète, en km.
         private double m_masse; // Masse de la planète, en masses terrestres.
-        private List<satellite> satellites; // Liste des satellites de la planète.
+        private List<Satellite> m_satellites; // Liste des satellites de la planète.
 
         // --Constructeurs--
 
@@ -118,6 +118,18 @@ namespace Atelier3_Planete
         public double MasseVolumique
         {
             get { if (m_rayon > 0 && m_masse > 0) { return (Masse * MASSE_TERRESTRE / Volume); } else { return 0; } }
+        }
+
+        /**
+         * Accesseur des satellites en lecture-écriture.
+         * Retourne le satellite à l'indice envoyé.
+         * Modifie le satellite à l'indice envoyé.
+         * Ajoute le satellite à la fin de la liste.
+         **/
+        public Satellite this[int i]
+        {
+            get { if (m_satellites != null && i < m_satellites.Count && i >= 0) { return m_satellites[i]; }  else { return null; } }
+            set { if (m_satellites == null) { m_satellites = new List<Satellite>() { value }; } else if (i < m_satellites.Count && i >= 0) { m_satellites[i] = value; } else { m_satellites.Add(value); } }
         }
 
         // --Méthodes--
@@ -268,7 +280,7 @@ namespace Atelier3_Planete
         }
 
         /**
-         * Retourner (en utilisant le CompareTo) vrai si la planète de droite est plus grande, sinon faux.
+         * Retourner (en utilisant le CompareTo) vrai si la planète de droite est plus grande ou égale, sinon faux.
          **/
         public static bool operator <= (Planete planeteGauche, Planete planeteDroite)
         {

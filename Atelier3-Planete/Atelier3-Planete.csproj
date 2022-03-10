@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="satellite.cs" />
+    <Compile Include="Satellite.cs" />
     <Compile Include="Planete.cs" />
     <Compile Include="Programme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

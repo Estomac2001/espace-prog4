@@ -4,6 +4,8 @@
 * Date: 23/02/2022 
 **/
 
+//Ajouter la méthode ajouterSatellite et enlever le set directement avec les indexeurs
+
 using System;
 using System.Collections.Generic;
 

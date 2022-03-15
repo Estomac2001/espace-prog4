@@ -23,7 +23,7 @@ namespace Univers
 
             Satellite s1 = new Satellite("Hey", 300, 0.2);
             Satellite s2 = new Satellite("Ho", 50, 0.1);
-            Satellite s3 = new Satellite("Ha", 1000, 0.5);
+            Satellite s3 = new Satellite("bbbb", 6371);
             Satellite s4 = s1 + s2;
 
             p2.addSatellite(s1);
@@ -42,7 +42,7 @@ namespace Univers
             Console.WriteLine(p1.Superficie);
             Console.WriteLine(p1.Volume);
             Console.WriteLine(p1.MasseVolumique);
-            Console.WriteLine(p1.PlusVolumineuse(p2).Nom);
+            Console.WriteLine(p1.PlusVolumineux(p2).Nom);
             Console.WriteLine(p2.PlusDense(p4).Nom);
             Console.WriteLine(p5.Equals(p3));
             Console.WriteLine(Planete.IndexOf(planetes, p5));
@@ -52,7 +52,11 @@ namespace Univers
             Console.WriteLine(p7.ToString() + "\n");
 
             Console.WriteLine(p2[0].ToString() + "\n");
-            Console.WriteLine(p2[1].ToString());
+            Console.WriteLine(p2[1].ToString() + "\n");
+
+            Console.WriteLine(p3 == s3);
+
+
 
             Console.ReadLine();
         }

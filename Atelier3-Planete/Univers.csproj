@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A04CFA8C-EA28-4D75-9050-DF5F31D42552}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Atelier3_Planete</RootNamespace>
-    <AssemblyName>Atelier3-Planete</AssemblyName>
+    <RootNamespace>Univers</RootNamespace>
+    <AssemblyName>Univers</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CorpsCeleste.cs" />
     <Compile Include="ObjetCeleste.cs" />
     <Compile Include="Satellite.cs" />
     <Compile Include="Planete.cs" />

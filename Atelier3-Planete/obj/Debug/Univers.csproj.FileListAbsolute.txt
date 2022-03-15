@@ -1,0 +1,8 @@
+E:\CÉGEP\CÉGEP-H2022\orienté objet\Ateliers\espace-prog4\Atelier3-Planete\obj\Debug\Univers.csproj.AssemblyReference.cache
+E:\CÉGEP\CÉGEP-H2022\orienté objet\Ateliers\espace-prog4\Atelier3-Planete\obj\Debug\Univers.csproj.SuggestedBindingRedirects.cache
+E:\CÉGEP\CÉGEP-H2022\orienté objet\Ateliers\espace-prog4\Atelier3-Planete\obj\Debug\Univers.csproj.CoreCompileInputs.cache
+E:\CÉGEP\CÉGEP-H2022\orienté objet\Ateliers\espace-prog4\Atelier3-Planete\bin\Debug\Univers.exe.config
+E:\CÉGEP\CÉGEP-H2022\orienté objet\Ateliers\espace-prog4\Atelier3-Planete\bin\Debug\Univers.exe
+E:\CÉGEP\CÉGEP-H2022\orienté objet\Ateliers\espace-prog4\Atelier3-Planete\bin\Debug\Univers.pdb
+E:\CÉGEP\CÉGEP-H2022\orienté objet\Ateliers\espace-prog4\Atelier3-Planete\obj\Debug\Univers.exe
+E:\CÉGEP\CÉGEP-H2022\orienté objet\Ateliers\espace-prog4\Atelier3-Planete\obj\Debug\Univers.pdb

@@ -4,12 +4,10 @@
 * Date: 23/02/2022 
 **/
 
-//Ajouter la méthode ajouterSatellite et enlever le set directement avec les indexeurs
-
 using System;
 using System.Collections.Generic;
 
-namespace Atelier3_Planete
+namespace Univers
 {
     public class Planete : IComparable
     {
@@ -131,7 +129,19 @@ namespace Atelier3_Planete
         public Satellite this[int i]
         {
             get { if (m_satellites != null && i < m_satellites.Count && i >= 0) { return m_satellites[i]; }  else { return null; } }
-            set { if (m_satellites == null) { m_satellites = new List<Satellite>() { value }; } else if (i < m_satellites.Count && i >= 0) { m_satellites[i] = value; } else { m_satellites.Add(value); } }
+        }
+
+        /**
+         * Ajouter le satellite à la fin de la liste.
+         * Si la liste est vide, créer un liste et ajouter le satellite.
+         **/
+        public void addSatellite(Satellite newSatellite)
+        {
+            if (m_satellites == null)  
+                m_satellites = new List<Satellite>() { newSatellite }; 
+
+            else 
+                m_satellites.Add(newSatellite);
         }
 
         // --Méthodes--

@@ -6,7 +6,7 @@
 
 using System;
 
-namespace Atelier3_Planete
+namespace Univers
 {
     
     class Programme
@@ -26,9 +26,9 @@ namespace Atelier3_Planete
             Satellite s3 = new Satellite("Ha", 1000, 0.5);
             Satellite s4 = s1 + s2;
 
-            p2[0] = s1;
+            p2.addSatellite(s1);
 
-            p2[1] = s4;
+            p2.addSatellite(s4);
 
 
             Planete[] planetes = { p1, p2, p3, p4, p6 };

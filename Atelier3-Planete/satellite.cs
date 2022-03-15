@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Atelier3_Planete
+namespace Univers
 {
     public class Satellite : IComparable
     {

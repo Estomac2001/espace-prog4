@@ -1,18 +1,14 @@
-﻿/**
-* But: Classe Planete, qui contient et retourne les caractéristiques physiques et des méthodes de comparaison.
-* Auteur: Thomas Laporte
-* Date: 23/02/2022 
-**/
-
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Univers
 {
-    public class Planete : CorpsCeleste, IComparable
+    public class Etoile : CorpsCeleste
     {
-        private Etoile m_parent;
-        private List<Satellite> m_satellites; // Liste des satellites de la planète.
+        private List<Planete> m_planetes; // Liste des planetes de l'étoile.
 
         // --Constructeurs--
 
@@ -20,7 +16,7 @@ namespace Univers
          * Constructeur avec le nom seulement.
          * Paramètre est le nom en String.
          **/
-        public Planete(String nom)
+        public Etoile(String nom)
         {
             m_nom = nom.Trim();
         }
@@ -30,7 +26,7 @@ namespace Univers
          * Paramètres sont le nom en String et le rayon en int.
          * On vérifie que le rayon est positif.
          **/
-        public Planete(String nom, int rayon)
+        public Etoile(String nom, int rayon)
         {
             m_nom = nom.Trim();
 
@@ -43,7 +39,7 @@ namespace Univers
          * Paramètres sont le nom en String, le rayon en int et la masse en double.
          * On vérifie que le rayon et la masse sont positifs.
          **/
-        public Planete(String nom, int rayon, double masse)
+        public Etoile(String nom, int rayon, double masse)
         {
             m_nom = nom.Trim();
 
@@ -62,39 +58,28 @@ namespace Univers
          * Modifie le satellite à l'indice envoyé.
          * Ajoute le satellite à la fin de la liste.
          **/
-        public Satellite this[int i]
+        public Planete this[int i]
         {
-            get { if (m_satellites != null && i < m_satellites.Count && i >= 0) { return m_satellites[i]; }  else { return null; } }
-        }
-
-        /**
-         * Accesseur du parent en lecture-écriture.
-         * Retourne le parent.
-         * Modifie le parent.
-         **/
-        public Etoile Parent
-        {
-            get { return m_parent; }
-            set { m_parent = value; }
+            get { if (m_planetes != null && i < m_planetes.Count && i >= 0) { return m_planetes[i]; } else { return null; } }
         }
 
         /**
          * Ajouter le satellite à la fin de la liste.
          * Si la liste est vide, créer un liste et ajouter le satellite.
          **/
-        public void ajouterSatellite(Satellite newSatellite)
+        public void ajouterPlanete(Planete newPlanete)
         {
-            if (m_satellites == null)
+            if (m_planetes == null)
             {
-                newSatellite.Parent = this;
-                m_satellites = new List<Satellite>() { newSatellite };
+                newPlanete.Parent = this;
+                m_planetes = new List<Planete>() { newPlanete };
             }
             else
             {
-                newSatellite.Parent = this;
-                m_satellites.Add(newSatellite);
+                newPlanete.Parent = this;
+                m_planetes.Add(newPlanete);
             }
-               
+
         }
 
         // --Méthodes et overrides--
@@ -151,5 +136,6 @@ namespace Univers
 
             return new Planete(planeteGauche.Nom + "Moins" + planeteDroite.Nom, nouveauRayon, nouvelleMasse);
         }
+
     }
 }

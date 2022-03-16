@@ -1,4 +1,10 @@
-﻿using System;
+﻿/**
+* But: Classe CorpsCeleste, qui correspond au parent de tout les corps dans l'espace.
+* Auteur: Thomas Laporte
+* Date: 14/03/2022 
+**/
+
+using System;
 
 namespace Univers
 {
@@ -194,6 +200,6 @@ namespace Univers
             if (corpsGauche.CompareTo(corpsDroit) == -1 || corpsGauche.Equals(corpsDroit))
                 return true;
             return false;
-        }        
+        }
     }
 }

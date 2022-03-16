@@ -4,12 +4,10 @@ namespace Univers
 {
     public class Satellite : CorpsCeleste
     {
+        private Planete m_parent;
+
         // --Constructeurs--
 
-        /**
-         * Constructeur avec le nom seulement.
-         * Paramètre est le nom en String.
-         **/
         public Satellite(String nom)
         {
             m_nom = nom.Trim();
@@ -42,6 +40,19 @@ namespace Univers
 
             if (masse > 0)
                 m_masse = masse;
+        }
+
+        // --Accesseurs
+
+        /**
+         * Accesseur du parent en lecture-écriture.
+         * Retourne le parent.
+         * Modifie le parent.
+         **/
+        public Planete Parent
+        {
+            get { return m_parent; }
+            set { m_parent = value; }
         }
 
         // --Méthodes--

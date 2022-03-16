@@ -1,5 +1,5 @@
 ﻿/**
-* But: Classe ObjetCeleste, qui correspond au parent de tous ce qui a dans l'espace. Contient seulement le nom.
+* But: Classe ObjetCeleste, qui correspond au parent de tout ce qui a dans l'espace. Contient seulement le nom.
 * Auteur: Thomas Laporte
 * Date: 14/03/2022 
 **/

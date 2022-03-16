@@ -26,9 +26,11 @@ namespace Univers
             Satellite s3 = new Satellite("bbbb", 6371);
             Satellite s4 = s1 + s2;
 
-            p2.addSatellite(s1);
+            p2.ajouterSatellite(s1);
 
-            p2.addSatellite(s4);
+            p2.ajouterSatellite(s4);
+
+            p2.Nom = "yeee";
 
 
             Planete[] planetes = { p1, p2, p3, p4, p6 };
@@ -55,6 +57,8 @@ namespace Univers
             Console.WriteLine(p2[1].ToString() + "\n");
 
             Console.WriteLine(p3 == s3);
+
+            Console.WriteLine("\n" + s1.Parent.ToString());
 
 
 

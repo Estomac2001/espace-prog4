@@ -1,13 +1,18 @@
-﻿using System;
+﻿/**
+* But: Classe Etoile, qui contient et retourne les caractéristiques physiques et des méthodes de comparaison.
+* Auteur: Thomas Laporte
+* Date: 22/03/2022 
+**/
+
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Univers
 {
-    public class Etoile : CorpsCeleste
+    public class Etoile : CorpsCelesteNoyau
     {
+        private int m_couronne;
+        private Galaxie m_parent;
         private List<Planete> m_planetes; // Liste des planetes de l'étoile.
 
         // --Constructeurs--
@@ -50,13 +55,52 @@ namespace Univers
                 m_masse = masse;
         }
 
+        /**
+         * Constructeur avec le nom et la rayon, masse et couronne.
+         * Paramètres sont le nom en String, le rayon en int et la masse en double.
+         * On vérifie que le rayon et la masse sont positifs.
+         **/
+        public Etoile(String nom, int rayon, double masse, int couronne)
+        {
+            m_nom = nom.Trim();
+
+            if (rayon > 0)
+                m_rayon = rayon;
+
+            if (masse > 0)
+                m_masse = masse;
+
+            if (couronne > 0)
+                m_couronne = couronne;
+        }
+
+        /**
+         * Constructeur avec le nom et la rayon, masse et couronne.
+         * Paramètres sont le nom en String, le rayon en int et la masse en double.
+         * On vérifie que le rayon et la masse sont positifs.
+         **/
+        public Etoile(String nom, int rayon, double masse, int couronne, int noyau)
+        {
+            m_nom = nom.Trim();
+
+            if (rayon > 0)
+                m_rayon = rayon;
+
+            if (masse > 0)
+                m_masse = masse;
+
+            if (couronne > 0)
+                m_couronne = couronne;
+
+            if (noyau > 0)
+                m_couronne = noyau;
+        }
+
         // --Accesseurs--
 
         /**
-         * Accesseur des satellites en lecture-écriture.
-         * Retourne le satellite à l'indice envoyé.
-         * Modifie le satellite à l'indice envoyé.
-         * Ajoute le satellite à la fin de la liste.
+         * Accesseur des planètes en lecture-écriture.
+         * Retourne la planète à l'indice envoyé.
          **/
         public Planete this[int i]
         {
@@ -64,7 +108,7 @@ namespace Univers
         }
 
         /**
-         * Ajouter le satellite à la fin de la liste.
+         * Ajouter la planète à la fin de la liste.
          * Si la liste est vide, créer un liste et ajouter le satellite.
          **/
         public void ajouterPlanete(Planete newPlanete)
@@ -82,6 +126,28 @@ namespace Univers
 
         }
 
+        /**
+         * Accesseur du parent en lecture-écriture.
+         * Retourne le parent.
+         * Modifie le parent.
+         **/
+        public Galaxie Parent
+        {
+            get { return m_parent; }
+            set { m_parent = value; }
+        }
+
+        /**
+         * Accesseur de la couronne en lecture-écriture.
+         * Retourne la couronne (en km).
+         * Modifie la couronne si elle est positive.
+         **/
+        public int Couronne
+        {
+            get { return m_couronne; }
+            set { if (value > 0) { m_couronne = value; } }
+        }
+
         // --Méthodes et overrides--
 
         /**
@@ -92,6 +158,11 @@ namespace Univers
             String informations; // Chaine de caractère qui contient toutes les informations sur la planète.
 
             informations = "Nom : " + this.Nom;
+
+            if (this.Noyau != 0)
+            {
+                informations += "\nNoyau : " + this.Noyau + " km";
+            }
 
             if (this.Rayon != 0)
             {
@@ -107,34 +178,47 @@ namespace Univers
                     informations += "\nMasse volumique : " + this.MasseVolumique + " kg/km^3";
             }
 
+            if (this.Couronne != 0)
+            {
+                informations += "\nCouronne : " + this.Couronne + " km";
+            }
+
             return informations;
         }
 
         // --Opérateurs arithmétiques--
 
         /**
-         * Retourner une nouvelle planète en additionnant les caractéristiques des deux (nom, rayon et masse).
+         * Retourner une nouvelle étoile en additionnant les caractéristiques des deux (nom, rayon et masse).
          **/
-        public static Planete operator +(Planete planeteGauche, Planete planeteDroite)
+        public static Etoile operator +(Etoile etoileGauche, Etoile etoileDroite)
         {
-            return new Planete(planeteGauche.Nom + "Plus" + planeteDroite.Nom, planeteGauche.Rayon + planeteDroite.Rayon, planeteGauche.Masse + planeteDroite.Masse);
+            return new Etoile(etoileGauche.Nom + "Plus" + etoileDroite.Nom, etoileGauche.Rayon + etoileDroite.Rayon, etoileGauche.Masse + etoileDroite.Masse, etoileGauche.Couronne + etoileDroite.Couronne, etoileGauche.Noyau + etoileDroite.Noyau);
         }
 
         /**
-         * Retourner une nouvelle planète en soustrayant les caractéristiques des deux  (nom, rayon et masse), mettre à 0 les caractéristiques si celles du corps de gauche sont plus petites.
+         * Retourner une nouvelle étoile en soustrayant les caractéristiques des deux (nom, rayon et masse), mettre à 0 les caractéristiques si celles du corps de gauche sont plus petites.
          **/
-        public static Planete operator -(Planete planeteGauche, Planete planeteDroite)
+        public static Etoile operator -(Etoile etoileGauche, Etoile etoileDroite)
         {
             int nouveauRayon = 0; // Nouveau rayon
             double nouvelleMasse = 0; // Nouvelle masse
+            int nouvelleCouronne = 0; // Nouveau rayon
+            int nouveauNoyau = 0; // Nouveau rayon
 
-            if (planeteGauche.m_rayon > planeteDroite.m_rayon)
-                nouveauRayon = planeteGauche.m_rayon - planeteDroite.m_rayon;
+            if (etoileGauche.m_rayon > etoileDroite.m_rayon)
+                nouveauRayon = etoileGauche.m_rayon - etoileDroite.m_rayon;
 
-            if (planeteGauche.m_masse > planeteDroite.m_masse)
-                nouvelleMasse = planeteGauche.m_masse - planeteDroite.m_masse;
+            if (etoileGauche.m_masse > etoileDroite.m_masse)
+                nouvelleMasse = etoileGauche.m_masse - etoileDroite.m_masse;
 
-            return new Planete(planeteGauche.Nom + "Moins" + planeteDroite.Nom, nouveauRayon, nouvelleMasse);
+            if (etoileGauche.m_couronne > etoileDroite.m_couronne)
+                nouvelleCouronne = etoileGauche.m_couronne - etoileDroite.m_couronne;
+
+            if (etoileGauche.m_noyau > etoileDroite.m_noyau)
+                nouveauNoyau = etoileGauche.m_noyau - etoileDroite.m_noyau;
+
+            return new Etoile(etoileGauche.Nom + "Moins" + etoileDroite.Nom, nouveauRayon, nouvelleMasse, nouvelleCouronne, nouveauNoyau);
         }
 
     }

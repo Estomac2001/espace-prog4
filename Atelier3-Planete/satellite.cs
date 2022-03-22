@@ -1,4 +1,10 @@
-﻿using System;
+﻿/**
+* But: Classe Satellite, qui contient et retourne les caractéristiques physiques et des méthodes de comparaison.
+* Auteur: Thomas Laporte
+* Date: 22/03/2022 
+**/
+
+using System;
 
 namespace Univers
 {

@@ -15,8 +15,6 @@ namespace Univers
         protected int m_rayon; // Rayon du corps, en km.
         protected double m_masse; // Masse du corps, en masses terrestres.
 
-        public CorpsCeleste() { }
-
         // --Accesseurs--
 
         /**

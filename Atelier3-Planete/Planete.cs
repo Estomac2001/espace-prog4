@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace Univers
 {
-    public class Planete : CorpsCeleste, IComparable
+    public class Planete : CorpsCelesteNoyau, IComparable
     {
         private Etoile m_parent;
         private List<Satellite> m_satellites; // Liste des satellites de la planète.
@@ -54,13 +54,30 @@ namespace Univers
                 m_masse = masse;
         }
 
+        /**
+         * Constructeur avec le nom et la rayon et noyau.
+         * Paramètres sont le nom en String, le rayon en int et la masse en double et noyau.
+         * On vérifie que le rayon et la masse et le noyau sont positifs.
+         **/
+        public Planete(String nom, int rayon, double masse, int noyau)
+        {
+            m_nom = nom.Trim();
+
+            if (rayon > 0)
+                m_rayon = rayon;
+
+            if (masse > 0)
+                m_masse = masse;
+
+            if (noyau > 0)
+                m_noyau = noyau;
+        }
+
         // --Accesseurs--
 
         /**
          * Accesseur des satellites en lecture-écriture.
          * Retourne le satellite à l'indice envoyé.
-         * Modifie le satellite à l'indice envoyé.
-         * Ajoute le satellite à la fin de la liste.
          **/
         public Satellite this[int i]
         {
@@ -108,6 +125,11 @@ namespace Univers
 
             informations = "Nom : " + this.Nom;
 
+            if (this.Noyau != 0)
+            {
+                informations += "\nNoyau : " + this.Noyau + " km";
+            }
+
             if (this.Rayon != 0)
             {
                 informations += "\nRayon : " + this.Rayon + " km";
@@ -132,7 +154,7 @@ namespace Univers
          **/
         public static Planete operator +(Planete planeteGauche, Planete planeteDroite)
         {
-            return new Planete(planeteGauche.Nom + "Plus" + planeteDroite.Nom, planeteGauche.Rayon + planeteDroite.Rayon, planeteGauche.Masse + planeteDroite.Masse);
+            return new Planete(planeteGauche.Nom + "Plus" + planeteDroite.Nom, planeteGauche.Rayon + planeteDroite.Rayon, planeteGauche.Masse + planeteDroite.Masse, planeteGauche.Noyau + planeteDroite.Noyau);
         }
 
         /**
@@ -142,6 +164,7 @@ namespace Univers
         {
             int nouveauRayon = 0; // Nouveau rayon
             double nouvelleMasse = 0; // Nouvelle masse
+            int nouveauNoyau = 0; // Nouveau rayon
 
             if (planeteGauche.m_rayon > planeteDroite.m_rayon)
                 nouveauRayon = planeteGauche.m_rayon - planeteDroite.m_rayon;
@@ -149,7 +172,10 @@ namespace Univers
             if (planeteGauche.m_masse > planeteDroite.m_masse)
                 nouvelleMasse = planeteGauche.m_masse - planeteDroite.m_masse;
 
-            return new Planete(planeteGauche.Nom + "Moins" + planeteDroite.Nom, nouveauRayon, nouvelleMasse);
+            if (planeteGauche.m_noyau > planeteDroite.m_noyau)
+                nouveauNoyau = planeteGauche.m_noyau - planeteDroite.m_noyau;
+
+            return new Planete(planeteGauche.Nom + "Moins" + planeteDroite.Nom, nouveauRayon, nouvelleMasse, nouveauNoyau);
         }
     }
 }

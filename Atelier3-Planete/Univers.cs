@@ -1,5 +1,5 @@
 ﻿/**
-* But: Classe Main, qui teste les différentes classes.
+* But: Classe Univers, qui teste les différentes classes et contien le Main.
 * Auteur: Thomas Laporte
 * Date: 23/02/2022 
 **/
@@ -9,10 +9,12 @@ using System;
 namespace Univers
 {
     
-    class Programme
+    class Univers
     {
         static void Main(string[] args)
         {
+            Etoile e1 = new Etoile("Soleil", 45666666, 1000000);
+
             Planete p1 = new Planete("Hellooo", 6371);
             Planete p2 = new Planete("chicago", 994, 9.5);
             Planete p3 = new Planete("bbbb", 6371);
@@ -30,12 +32,13 @@ namespace Univers
 
             p2.ajouterSatellite(s4);
 
+
             p2.Nom = "yeee";
 
+            e1.ajouterPlanete(p2);
 
             Planete[] planetes = { p1, p2, p3, p4, p6 };
 
-     
             p1.Masse = 4.5;
 
             Console.WriteLine(p1.Nom);
@@ -60,7 +63,7 @@ namespace Univers
 
             Console.WriteLine("\n" + s1.Parent.ToString());
 
-
+            Console.WriteLine("\n" + e1[0][0].ToString());
 
             Console.ReadLine();
         }
